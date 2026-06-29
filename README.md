@@ -25,7 +25,7 @@ Managers can generate reports such as:
 ---
 
 👉 In short, this project illustrates how SSIS and SSAS can be applied to **transform raw data into actionable insights** for business decision-making.
-________________________________________________--
+--
 
 # SSIS-SSAS-DataWarehouse
 
