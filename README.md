@@ -1,70 +1,56 @@
 # SSIS-SSAS-DataWarehouse
 
+## Overview
+This project demonstrates a simple Data Warehouse design for HR training, built with SQL scripts and SSIS packages.  
+It follows a **star schema** structure, integrating dimension tables (Employee, Course, Date) with a fact table (Training).
 
--- 1. Tạo Database HR_Training_DW
-CREATE DATABASE HR_Training_DW;
-GO
+## Features
+- **[ETL Process](ca://s?q=ETL_process_with_SSIS)**: Extract data from multiple sources, transform and clean, then load into the warehouse.  
+- **[Dimension Tables](ca://s?q=Dimension_tables_in_data_warehouse)**: Employee, Course, and Date for structured analysis.  
+- **[Fact Table](ca://s?q=Fact_table_in_data_warehouse)**: Tracks training participation, attended hours, and costs.  
+- **[Business Intelligence](ca://s?q=Business_Intelligence_with_SSIS)**: Enables reporting and analysis with tools like SSAS or Power BI.
 
-USE HR_Training_DW;
-GO
+## Practical Application
+This exercise simulates how organizations consolidate scattered data into a centralized repository.  
+Managers can generate reports such as:
+- Monthly revenue and training costs  
+- Employee participation in courses  
+- Inventory of training hours per department  
 
--- 2. Tạo bảng chiều Nhân viên (Dim_Employee)
-CREATE TABLE Dim_Employee (
-    EmployeeID INT PRIMARY KEY,          -- Mã nhân viên
-    EmployeeName NVARCHAR(100),          -- Tên nhân viên
-    Department NVARCHAR(255),            -- Phòng ban
-    Gender NVARCHAR(50)                  -- Giới tính
-);
+## How to Use
+1. Run the SQL scripts to create the database schema (`HR_Training_DW`).  
+2. Use SSIS packages to automate data loading and transformation.  
+3. Connect the warehouse to BI tools for reporting and dashboards.
 
--- 3. Tạo bảng chiều Khóa học (Dim_Course)
-CREATE TABLE Dim_Course (
-    CourseID INT PRIMARY KEY,            -- Mã khóa học
-    CourseName NVARCHAR(255),            -- Tên khóa học
-    Topic NVARCHAR(100),                 -- Chủ đề khóa học
-    CostPerEmployee DECIMAL(18,2)        -- Đơn giá đào tạo
-);
+---
 
--- 4. Tạo bảng chiều Thời gian (Dim_Date)
-CREATE TABLE Dim_Date (
-    DateKey INT PRIMARY KEY,             -- Định dạng YYYYMMDD
-    FullDate DATE,
-    Day INT,
-    Month INT,
-    Quarter INT,
-    Year INT
-);
+👉 In short, this project illustrates how SSIS and SSAS can be applied to **transform raw data into actionable insights** for business decision-making.
+________________________________________________--
 
--- 5. Tạo bảng FactTraining (Fact_Training)
-CREATE TABLE Fact_Training (
-    RegistrationID INT PRIMARY KEY,      -- Mã đăng ký
-    EmployeeID INT NOT NULL,             -- Khóa ngoại Dim_Employee
-    CourseID INT NOT NULL,               -- Khóa ngoại Dim_Course
-    DateKey INT NOT NULL,                -- Khóa ngoại Dim_Date
-    AttendedHours INT,                   -- Số giờ tham gia
-    TotalCost DECIMAL(18,2),             -- Chi phí đào tạo
+# SSIS-SSAS-DataWarehouse
 
-    CONSTRAINT FK_FactTraining_DimEmployee FOREIGN KEY (EmployeeID) REFERENCES Dim_Employee(EmployeeID),
-    CONSTRAINT FK_FactTraining_DimCourse FOREIGN KEY (CourseID) REFERENCES Dim_Course(CourseID),
-    CONSTRAINT FK_FactTraining_DimDate FOREIGN KEY (DateKey) REFERENCES Dim_Date(DateKey)
-);
-GO
+## Tổng quan
+Dự án này minh họa thiết kế một **Kho dữ liệu (Data Warehouse)** đơn giản cho hệ thống đào tạo nhân sự, được xây dựng bằng SQL script và gói SSIS.  
+Mô hình sử dụng cấu trúc **Star Schema**, kết hợp các bảng chiều (Nhân viên, Khóa học, Thời gian) với bảng sự kiện (Training).
 
--- 6. Sinh dữ liệu Dim_Date từ năm 2020 đến 2030
-DECLARE @StartDate DATE = '2020-01-01';
-DECLARE @EndDate DATE = '2030-12-31';
+## Tính năng
+- **[Quy trình ETL](ca://s?q=Quy_tr%C3%ACnh_ETL_v%E1%BB%9Bi_SSIS)**: Trích xuất dữ liệu từ nhiều nguồn, làm sạch và chuẩn hóa, sau đó nạp vào kho dữ liệu.  
+- **[Bảng chiều](ca://s?q=B%E1%BA%A3ng_chi%E1%BB%81_trong_Data_Warehouse)**: Nhân viên, Khóa học, và Thời gian để phục vụ phân tích.  
+- **[Bảng sự kiện](ca://s?q=B%E1%BA%A3ng_s%E1%BB%B1_ki%E1%BB%87n_trong_Data_Warehouse)**: Lưu thông tin tham gia đào tạo, số giờ học và chi phí.  
+- **[Phân tích BI](ca://s?q=Ph%C3%A2n_t%C3%ADch_BI_v%E1%BB%9Bi_SSIS)**: Kết nối với SSAS hoặc Power BI để tạo báo cáo và dashboard.
 
-WHILE @StartDate <= @EndDate
-BEGIN
-    INSERT INTO Dim_Date (DateKey, FullDate, Day, Month, Quarter, Year)
-    VALUES (
-        CONVERT(INT, CONVERT(VARCHAR(8), @StartDate, 112)), 
-        @StartDate,
-        DAY(@StartDate),
-        MONTH(@StartDate),
-        DATEPART(QUARTER, @StartDate),
-        YEAR(@StartDate)
-    );
+## Ứng dụng thực tế
+Bài tập này mô phỏng cách doanh nghiệp gom dữ liệu rời rạc thành một kho dữ liệu tập trung.  
+Nhờ đó, nhà quản lý có thể tạo báo cáo như:
+- Doanh thu và chi phí đào tạo theo tháng  
+- Tỷ lệ nhân viên tham gia khóa học  
+- Tổng số giờ đào tạo theo phòng ban  
 
-    SET @StartDate = DATEADD(DAY, 1, @StartDate);
-END;
-GO
+## Cách sử dụng
+1. Chạy các script SQL để tạo cơ sở dữ liệu `HR_Training_DW`.  
+2. Sử dụng gói SSIS để tự động hóa việc nạp và biến đổi dữ liệu.  
+3. Kết nối kho dữ liệu với công cụ BI để phân tích và trực quan hóa.
+
+---
+
+👉 Tóm lại, dự án này minh họa cách SSIS và SSAS giúp doanh nghiệp **biến dữ liệu thô thành thông tin hữu ích cho quản trị và ra quyết định**.
