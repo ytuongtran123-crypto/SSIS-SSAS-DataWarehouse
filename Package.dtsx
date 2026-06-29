@@ -1,0 +1,2177 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/29/2026 2:52:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-Q6HE629I"
+  DTS:CreatorName="LAPTOP-Q6HE629I\LAPTOP"
+  DTS:DTSID="{BE3B27EC-14D3-4537-92A9-9862BC2CF486}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1066"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{D231013E-5F8F-4B62-BC2B-5A6CEE6C56D1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{090D88B3-E19D-43F4-8944-91D6411442AD}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\HUB\HK4\Kho du lieu\hr_training_data.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E8FF6E4D-BA4B-4F2B-AB40-C34A3136073C}"
+      DTS:ObjectName="LAPTOP-Q6HE629I\COOUT.HR_Training_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-Q6HE629I\COOUT;Initial Catalog=HR_Training_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{E8FF6E4D-BA4B-4F2B-AB40-C34A3136073C}LAPTOP-Q6HE629I\COOUT.HR_Training_DW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DimCourses"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FF997130-BF21-4E00-899B-29E354849663}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimCourses"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimCourses\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">TrainingCourses$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimCourses\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseID]"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseID]"
+                      name="CourseID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseName]"
+                      length="255"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseName]"
+                      name="CourseName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[Topic]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[Topic]"
+                      length="255"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[Topic]"
+                      name="Topic"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CostPerEmployee]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CostPerEmployee]"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CostPerEmployee]"
+                      name="CostPerEmployee"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseID]"
+                      dataType="r8"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CourseName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[Topic]"
+                      dataType="wstr"
+                      length="255"
+                      name="Topic" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].ExternalColumns[CostPerEmployee]"
+                      dataType="r8"
+                      name="CostPerEmployee" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CourseID]"
+                      dataType="r8"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CourseID]"
+                      name="CourseID" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CourseName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CourseName]"
+                      name="CourseName" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[Topic]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[Topic]"
+                      name="Topic" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CostPerEmployee]"
+                      dataType="r8"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[CostPerEmployee]"
+                      name="CostPerEmployee" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimCourses\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Course]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimCourses\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CourseID]"
+                      cachedDataType="r8"
+                      cachedName="CourseID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseID]"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseID]" />
+                    <inputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CourseName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CourseName"
+                      externalMetadataColumnId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseName]"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseName]" />
+                    <inputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Topic]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Topic"
+                      externalMetadataColumnId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Topic]"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[Topic]" />
+                    <inputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CostPerEmployee]"
+                      cachedDataType="r8"
+                      cachedName="CostPerEmployee"
+                      externalMetadataColumnId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CostPerEmployee]"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CostPerEmployee]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseID]"
+                      dataType="i4"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CourseName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Topic]"
+                      dataType="wstr"
+                      length="100"
+                      name="Topic" />
+                    <externalMetadataColumn
+                      refId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CostPerEmployee]"
+                      dataType="numeric"
+                      name="CostPerEmployee"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimCourses\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimCourses\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimCourses\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimCourses\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimCourses\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DimCourses\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimCourses\Sort.Inputs[Sort Input].Columns[CourseID]"
+                      cachedDataType="r8"
+                      cachedName="CourseID"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimCourses\Sort.Inputs[Sort Input].Columns[CourseName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CourseName"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimCourses\Sort.Inputs[Sort Input].Columns[Topic]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Topic"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[Topic]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimCourses\Sort.Inputs[Sort Input].Columns[CostPerEmployee]"
+                      cachedDataType="r8"
+                      cachedName="CostPerEmployee"
+                      lineageId="Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CostPerEmployee]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimCourses\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseID]"
+                      dataType="r8"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseID]"
+                      name="CourseID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CourseName]"
+                      name="CourseName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CourseName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[Topic]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[Topic]"
+                      name="Topic">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[Topic]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CostPerEmployee]"
+                      dataType="r8"
+                      lineageId="Package\DimCourses\Sort.Outputs[Sort Output].Columns[CostPerEmployee]"
+                      name="CostPerEmployee">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimCourses\Excel Source.Outputs[Excel Source Output].Columns[CostPerEmployee]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimCourses.Paths[Excel Source Output]"
+              endId="Package\DimCourses\Sort.Inputs[Sort Input]"
+              name="Excel Source Output"
+              startId="Package\DimCourses\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\DimCourses.Paths[Sort Output]"
+              endId="Package\DimCourses\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\DimCourses\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DimEmployee"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CA5EF408-88E4-4B15-87E3-350B8EDFED93}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimEmployee"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimEmployee\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Employees$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimEmployee\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeName]"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeName]"
+                      name="EmployeeName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Department]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[Department]"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Department]"
+                      name="Department"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeID]"
+                      dataType="r8"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeName]"
+                      dataType="wstr"
+                      length="255"
+                      name="EmployeeName" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[Department]"
+                      dataType="wstr"
+                      length="255"
+                      name="Department" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeName]"
+                      name="EmployeeName" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[Department]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[Department]"
+                      name="Department" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimEmployee\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimEmployee\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="r8"
+                      cachedName="EmployeeID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EmployeeName"
+                      externalMetadataColumnId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeName]"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeName]" />
+                    <inputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Department]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Department"
+                      externalMetadataColumnId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Department]"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Department]" />
+                    <inputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Gender]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeName]"
+                      dataType="wstr"
+                      length="100"
+                      name="EmployeeName" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Department]"
+                      dataType="wstr"
+                      length="255"
+                      name="Department" />
+                    <externalMetadataColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="50"
+                      name="Gender" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimEmployee\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimEmployee\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimEmployee\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimEmployee\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimEmployee\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DimEmployee\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimEmployee\Sort.Inputs[Sort Input].Columns[EmployeeID]"
+                      cachedDataType="r8"
+                      cachedName="EmployeeID"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimEmployee\Sort.Inputs[Sort Input].Columns[EmployeeName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EmployeeName"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimEmployee\Sort.Inputs[Sort Input].Columns[Department]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Department"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Department]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimEmployee\Sort.Inputs[Sort Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      lineageId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimEmployee\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[EmployeeName]"
+                      name="EmployeeName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[EmployeeName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Department]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Department]"
+                      name="Department">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Department]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DimEmployee\Sort.Outputs[Sort Output].Columns[Gender]"
+                      name="Gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DimEmployee\Excel Source.Outputs[Excel Source Output].Columns[Gender]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimEmployee.Paths[Excel Source Output]"
+              endId="Package\DimEmployee\Sort.Inputs[Sort Input]"
+              name="Excel Source Output"
+              startId="Package\DimEmployee\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\DimEmployee.Paths[Sort Output]"
+              endId="Package\DimEmployee\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\DimEmployee\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FactTraining"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5EFBB138-19B1-4B13-9F2F-9AB0C878F4C9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FactTraining"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FactTraining\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    
+r.RegistrationID,
+    
+r.EmployeeID,
+    
+r.CourseID,
+    
+(YEAR(r.RegistrationDate)*10000 
+        + MONTH(r.RegistrationDate)*100 
+        + DAY(r.RegistrationDate)) AS DateKey,
+    
+r.AttendedHours,
+    
+(r.AttendedHours * c.CostPerEmployee) AS TotalCost
+
+FROM [TrainingRegistrations$] r
+
+INNER JOIN [TrainingCourses$] c 
+    
+ON r.CourseID = c.CourseID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactTraining\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[RegistrationID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[RegistrationID]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[RegistrationID]"
+                      name="RegistrationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[CourseID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseID]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[CourseID]"
+                      name="CourseID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[AttendedHours]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[AttendedHours]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[AttendedHours]"
+                      name="AttendedHours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[TotalCost]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[TotalCost]"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[TotalCost]"
+                      name="TotalCost"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[RegistrationID]"
+                      dataType="r8"
+                      name="RegistrationID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[EmployeeID]"
+                      dataType="r8"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[CourseID]"
+                      dataType="r8"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[AttendedHours]"
+                      dataType="r8"
+                      name="AttendedHours" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].ExternalColumns[TotalCost]"
+                      dataType="r8"
+                      name="TotalCost" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[RegistrationID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[RegistrationID]"
+                      name="RegistrationID" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[CourseID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[CourseID]"
+                      name="CourseID" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[AttendedHours]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[AttendedHours]"
+                      name="AttendedHours" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[TotalCost]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[TotalCost]"
+                      name="TotalCost" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactTraining\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Fact_Training]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactTraining\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-Q6HE629I\COOUT.HR_Training_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RegistrationID]"
+                      cachedDataType="r8"
+                      cachedName="RegistrationID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationID]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[RegistrationID]" />
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="r8"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CourseID]"
+                      cachedDataType="r8"
+                      cachedName="CourseID"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseID]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[CourseID]" />
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AttendedHours]"
+                      cachedDataType="r8"
+                      cachedName="AttendedHours"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendedHours]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[AttendedHours]" />
+                    <inputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalCost]"
+                      cachedDataType="r8"
+                      cachedName="TotalCost"
+                      externalMetadataColumnId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCost]"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[TotalCost]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationID]"
+                      dataType="i4"
+                      name="RegistrationID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CourseID]"
+                      dataType="i4"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendedHours]"
+                      dataType="i4"
+                      name="AttendedHours" />
+                    <externalMetadataColumn
+                      refId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalCost]"
+                      dataType="numeric"
+                      name="TotalCost"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactTraining\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactTraining\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactTraining\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FactTraining\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[RegistrationID]"
+                      cachedDataType="r8"
+                      cachedName="RegistrationID"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[RegistrationID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[EmployeeID]"
+                      cachedDataType="r8"
+                      cachedName="EmployeeID"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[CourseID]"
+                      cachedDataType="r8"
+                      cachedName="CourseID"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[CourseID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[DateKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[AttendedHours]"
+                      cachedDataType="r8"
+                      cachedName="AttendedHours"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[AttendedHours]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactTraining\Sort.Inputs[Sort Input].Columns[TotalCost]"
+                      cachedDataType="r8"
+                      cachedName="TotalCost"
+                      lineageId="Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[TotalCost]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactTraining\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[RegistrationID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[RegistrationID]"
+                      name="RegistrationID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[RegistrationID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[EmployeeID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[EmployeeID]"
+                      name="EmployeeID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[EmployeeID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[CourseID]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[CourseID]"
+                      name="CourseID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[CourseID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[DateKey]"
+                      name="DateKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[DateKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[AttendedHours]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[AttendedHours]"
+                      name="AttendedHours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[AttendedHours]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[TotalCost]"
+                      dataType="r8"
+                      lineageId="Package\FactTraining\Sort.Outputs[Sort Output].Columns[TotalCost]"
+                      name="TotalCost">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactTraining\Excel Source.Outputs[Excel Source Output].Columns[TotalCost]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FactTraining.Paths[Excel Source Output]"
+              endId="Package\FactTraining\Sort.Inputs[Sort Input]"
+              name="Excel Source Output"
+              startId="Package\FactTraining\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\FactTraining.Paths[Sort Output]"
+              endId="Package\FactTraining\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\FactTraining\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate F"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A31D6558-761D-42BD-BA7B-7092AD8E04CB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate F"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E8FF6E4D-BA4B-4F2B-AB40-C34A3136073C}"
+          SQLTask:SqlStatementSource="DELETE FROM Fact_Training;&#xA;DELETE FROM Dim_Employee;&#xA;&#xA;DELETE FROM Dim_Course;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2BF97211-671E-474A-B073-85EF78BE5760}"
+      DTS:From="Package\Truncate F"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DimEmployee" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E89DB4B-F648-4782-8B3B-234B7819B338}"
+      DTS:From="Package\DimEmployee"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\DimCourses" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{D09C8166-ADB9-468A-8368-01436E205381}"
+      DTS:From="Package\DimCourses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\FactTraining" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\DimCourses"
+          TopLeft="289.166650867297,200.199998607834" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\DimEmployee"
+          TopLeft="166.666657560402,123.066665810876" />
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\FactTraining"
+          TopLeft="397.499978281558,266.933331477112" />
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\Truncate F"
+          TopLeft="59.1666634339427,51.9999996383984" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="123.566663433943,93.5999996383984">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.699994126459,29.466666172478"
+              Start="0,0"
+              End="114.699994126459,21.966666172478">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.733333086239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.733333086239"
+                    Point2="0,14.733333086239"
+                    Point3="4,14.733333086239" />
+                  <mssgle:LineSegment
+                    End="110.699994126459,14.733333086239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110.699994126459,14.733333086239"
+                    Point2="114.699994126459,14.733333086239"
+                    Point3="114.699994126459,18.733333086239" />
+                  <mssgle:LineSegment
+                    End="114.699994126459,21.966666172478" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="238.266657560402,164.666665810876">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.899993306895,35.533332796958"
+              Start="0,0"
+              End="118.899993306895,28.033332796958">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.766666398479" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.766666398479"
+                    Point2="0,17.766666398479"
+                    Point3="4,17.766666398479" />
+                  <mssgle:LineSegment
+                    End="114.899993306895,17.766666398479" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.899993306895,17.766666398479"
+                    Point2="118.899993306895,17.766666398479"
+                    Point3="118.899993306895,21.766666398479" />
+                  <mssgle:LineSegment
+                    End="118.899993306895,28.033332796958" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="357.166650867297,241.799998607834">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108.333327414261,25.133332869278"
+              Start="0,0"
+              End="108.333327414261,17.633332869278">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.566666434639" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.566666434639"
+                    Point2="0,12.566666434639"
+                    Point3="4,12.566666434639" />
+                  <mssgle:LineSegment
+                    End="104.333327414261,12.566666434639" />
+                  <mssgle:CubicBezierSegment
+                    Point1="104.333327414261,12.566666434639"
+                    Point2="108.333327414261,12.566666434639"
+                    Point3="108.333327414261,16.566666434639" />
+                  <mssgle:LineSegment
+                    End="108.333327414261,17.633332869278" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DimCourses">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DimCourses\OLE DB Destination"
+          TopLeft="312.999995335936,215.999996781349" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\DimCourses\Sort"
+          TopLeft="239.999996423721,122.999998167158" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\DimCourses\Excel Source"
+          TopLeft="116.999998256564,28.9999995678663" />
+        <EdgeLayout
+          Id="Package\DimCourses.Paths[Sort Output]"
+          TopLeft="288.799996423721,164.599998167158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.799998912215,51.3999986141912"
+              Start="0,0"
+              End="109.799998912215,43.8999986141912">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.6999993070956" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.6999993070956"
+                    Point2="0,25.6999993070956"
+                    Point3="4,25.6999993070956" />
+                  <mssgle:LineSegment
+                    End="105.799998912215,25.6999993070956" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.799998912215,25.6999993070956"
+                    Point2="109.799998912215,25.6999993070956"
+                    Point3="109.799998912215,29.6999993070956" />
+                  <mssgle:LineSegment
+                    End="109.799998912215,43.8999986141912" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimCourses.Paths[Excel Source Output]"
+          TopLeft="186.999998256564,70.5999995678663">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.799998167157,52.3999985992913"
+              Start="0,0"
+              End="101.799998167157,44.8999985992913">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.1999992996457" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.1999992996457"
+                    Point2="0,26.1999992996457"
+                    Point3="4,26.1999992996457" />
+                  <mssgle:LineSegment
+                    End="97.799998167157,26.1999992996457" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97.799998167157,26.1999992996457"
+                    Point2="101.799998167157,26.1999992996457"
+                    Point3="101.799998167157,30.1999992996457" />
+                  <mssgle:LineSegment
+                    End="101.799998167157,44.8999985992913" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimCourses\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimCourses\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DimEmployee">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DimEmployee\OLE DB Destination"
+          TopLeft="283.333317852683,196.733331965274" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\DimEmployee\Sort"
+          TopLeft="209.999988526106,101.399999294877" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\DimEmployee\Excel Source"
+          TopLeft="101.666661111845,13.8666665702396" />
+        <EdgeLayout
+          Id="Package\DimEmployee.Paths[Sort Output]"
+          TopLeft="258.799988526106,142.999999294877">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="110.133329326577,53.7333326703965"
+              Start="0,0"
+              End="110.133329326577,46.2333326703965">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8666663351983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8666663351983"
+                    Point2="0,26.8666663351983"
+                    Point3="4,26.8666663351983" />
+                  <mssgle:LineSegment
+                    End="106.133329326577,26.8666663351983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="106.133329326577,26.8666663351983"
+                    Point2="110.133329326577,26.8666663351983"
+                    Point3="110.133329326577,30.8666663351983" />
+                  <mssgle:LineSegment
+                    End="110.133329326577,46.2333326703965" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimEmployee.Paths[Excel Source Output]"
+          TopLeft="171.666661111845,55.4666665702396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.1333274142612,45.9333327246376"
+              Start="0,0"
+              End="87.1333274142612,38.4333327246376">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9666663623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.9666663623188"
+                    Point2="0,22.9666663623188"
+                    Point3="4,22.9666663623188" />
+                  <mssgle:LineSegment
+                    End="83.1333274142612,22.9666663623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="83.1333274142612,22.9666663623188"
+                    Point2="87.1333274142612,22.9666663623188"
+                    Point3="87.1333274142612,26.9666663623188" />
+                  <mssgle:LineSegment
+                    End="87.1333274142612,38.4333327246376" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimEmployee\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimEmployee\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\FactTraining">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\FactTraining\Sort"
+          TopLeft="218.999996736646,105.999998420477" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\FactTraining\OLE DB Destination"
+          TopLeft="311.999995350837,209.999996870756" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\FactTraining\Excel Source"
+          TopLeft="97.9999985396863,30.999999538064" />
+        <EdgeLayout
+          Id="Package\FactTraining.Paths[Excel Source Output]"
+          TopLeft="167.999998539686,72.599999538064">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.7999981969595,33.3999988824125"
+              Start="0,0"
+              End="99.7999981969595,25.8999988824125">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.6999994412063" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.6999994412063"
+                    Point2="0,16.6999994412063"
+                    Point3="4,16.6999994412063" />
+                  <mssgle:LineSegment
+                    End="95.7999981969595,16.6999994412063" />
+                  <mssgle:CubicBezierSegment
+                    Point1="95.7999981969595,16.6999994412063"
+                    Point2="99.7999981969595,16.6999994412063"
+                    Point3="99.7999981969595,20.6999994412063" />
+                  <mssgle:LineSegment
+                    End="99.7999981969595,25.8999988824125" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactTraining.Paths[Sort Output]"
+          TopLeft="267.799996736646,147.599998420477">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="129.799998614191,62.3999984502792"
+              Start="0,0"
+              End="129.799998614191,54.8999984502792">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1999992251396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.1999992251396"
+                    Point2="0,31.1999992251396"
+                    Point3="4,31.1999992251396" />
+                  <mssgle:LineSegment
+                    End="125.799998614191,31.1999992251396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="125.799998614191,31.1999992251396"
+                    Point2="129.799998614191,31.1999992251396"
+                    Point3="129.799998614191,35.1999992251396" />
+                  <mssgle:LineSegment
+                    End="129.799998614191,54.8999984502792" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactTraining\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactTraining\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
